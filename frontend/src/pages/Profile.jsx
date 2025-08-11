@@ -73,13 +73,24 @@ const Profile = () => {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           className="w-full mb-4 p-2 border rounded"
         />
-        <input
-          type="text"
-          placeholder="role"
-          value={formData.role}
-          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-          className="w-full mb-4 p-2 border rounded"
-        />
+
+        {/* Replace input with select dropdown for role */}
+        <div className="mb-4">
+          <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
+            Role
+          </label>
+          <select
+            id="role"
+            name="role"
+            value={formData.role}
+            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+            className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+            <option value="moderator">Moderator</option>
+          </select>
+        </div>
         <input
           type="text"
           placeholder="Address"
