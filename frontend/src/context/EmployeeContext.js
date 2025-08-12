@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import employeeService from '../pages/Employees';
 import { useAuth } from './AuthContext';
 
@@ -154,6 +154,7 @@ export const EmployeeProvider = ({ children }) => {
     try {
       dispatch({ type: 'EMPLOYEE_REQUEST' });
       const response = await employeeService.deactivateEmployee(id, user.token);
+      console.log(response);
 
       // Get updated employee data
       const updatedEmployee = await employeeService.getEmployee(id, user.token);
@@ -170,6 +171,7 @@ export const EmployeeProvider = ({ children }) => {
     try {
       dispatch({ type: 'EMPLOYEE_REQUEST' });
       const response = await employeeService.activateEmployee(id, user.token);
+      console.log(response);
 
       // Get updated employee data
       const updatedEmployee = await employeeService.getEmployee(id, user.token);

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {useShiftContext} from '../context/ShiftContext';
-import {useAuth} from '../context/AuthContext';
 
 const ShiftForm = () => {
     const {createShift, updateShift, getShift, shift, isLoading, error, success, resetSuccess} = useShiftContext();
