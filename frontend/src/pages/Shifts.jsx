@@ -14,30 +14,30 @@ const createShift = async (shiftData, token) => {
     return response.data;
 };
 
-// // Get all shifts
-// const getShifts = async (token) => {
-//     const config = {
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     };
-//
-//     const response = await axios.get(API_URL, config);
-//     return response.data;
-// };
-//
-// // Get single shift
-// const getShift = async (shiftId, token) => {
-//     const config = {
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     };
-//
-//     const response = await axios.get(API_URL + shiftId, config);
-//     return response.data;
-// };
-//
+// Get all shifts
+const getShifts = async (token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+
+    const response = await axios.get(API_URL, config);
+    return response.data;
+};
+
+// Get single shift
+const getShift = async (shiftId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+
+    const response = await axios.get(API_URL + shiftId, config);
+    return response.data;
+};
+
 // // Update shift
 // const updateShift = async (shiftId, shiftData, token) => {
 //     const config = {
@@ -64,8 +64,8 @@ const createShift = async (shiftData, token) => {
 
 const shiftService = {
     createShift,
-    // getShifts,
-    // getShift,
+    getShifts,
+    getShift,
     // updateShift,
     // deleteShift
 };
