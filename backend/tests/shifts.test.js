@@ -121,33 +121,33 @@ describe('Shifts API', () => {
       expect(res.body).to.have.property('location', 'Branch Office');
     });
   });
-//
-//   describe('PUT /api/shifts/:id', () => {
-//     it('should update a shift', async () => {
-//       const updatedShift = {
-//         date: '2023-11-16',
-//         startTime: '08:00',
-//         endTime: '16:00',
-//         requiredStaff: 4,
-//         location: 'Updated Office'
-//       };
-//
-//       const res = await chai.request(app)
-//         .put(`/api/shifts/${testShift._id}`)
-//         .set('Authorization', `Bearer ${token}`)
-//         .send(updatedShift);
-//
-//       expect(res).to.have.status(200);
-//       expect(res.body).to.be.an('object');
-//       expect(res.body).to.have.property('_id').equal(testShift._id.toString());
-//       expect(res.body).to.have.property('date', '2023-11-16T00:00:00.000Z');
-//       expect(res.body).to.have.property('startTime', '08:00');
-//       expect(res.body).to.have.property('endTime', '16:00');
-//       expect(res.body).to.have.property('requiredStaff', 4);
-//       expect(res.body).to.have.property('location', 'Updated Office');
-//     });
-//   });
-//
+
+  describe('PUT /api/shifts/:id', () => {
+    it('should update a shift', async () => {
+      const updatedShift = {
+        date: '2023-11-16',
+        startTime: '08:00',
+        endTime: '16:00',
+        requiredStaff: 4,
+        location: 'Updated Office'
+      };
+
+      const res = await chai.request(app)
+        .put(`/api/shifts/${testShift._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send(updatedShift);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('_id').equal(testShift._id.toString());
+      expect(res.body).to.have.property('date', '2023-11-16T00:00:00.000Z');
+      expect(res.body).to.have.property('startTime', '08:00');
+      expect(res.body).to.have.property('endTime', '16:00');
+      expect(res.body).to.have.property('requiredStaff', 4);
+      expect(res.body).to.have.property('location', 'Updated Office');
+    });
+  });
+
 //   describe('DELETE /api/shifts/:id', () => {
 //     it('should delete a shift', async () => {
 //       // Create a new shift to delete
