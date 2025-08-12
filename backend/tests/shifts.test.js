@@ -148,30 +148,30 @@ describe('Shifts API', () => {
     });
   });
 
-//   describe('DELETE /api/shifts/:id', () => {
-//     it('should delete a shift', async () => {
-//       // Create a new shift to delete
-//       const shiftToDelete = new Shift({
-//         date: '2023-11-25',
-//         startTime: '09:00',
-//         endTime: '17:00',
-//         requiredStaff: 1,
-//         location: 'To Be Deleted',
-//         createdBy: userId
-//       });
-//       await shiftToDelete.save();
-//
-//       const res = await chai.request(app)
-//         .delete(`/api/shifts/${shiftToDelete._id}`)
-//         .set('Authorization', `Bearer ${token}`);
-//
-//       expect(res).to.have.status(200);
-//       expect(res.body).to.be.an('object');
-//       expect(res.body).to.have.property('message', 'Shift removed');
-//
-//       // Verify shift is deleted
-//       const deletedShift = await Shift.findById(shiftToDelete._id);
-//       expect(deletedShift).to.be.null;
-//     });
-//   });
+  describe('DELETE /api/shifts/:id', () => {
+    it('should delete a shift', async () => {
+      // Create a new shift to delete
+      const shiftToDelete = new Shift({
+        date: '2023-11-25',
+        startTime: '09:00',
+        endTime: '17:00',
+        requiredStaff: 1,
+        location: 'To Be Deleted',
+        createdBy: userId
+      });
+      await shiftToDelete.save();
+
+      const res = await chai.request(app)
+        .delete(`/api/shifts/${shiftToDelete._id}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('message', 'Shift removed');
+
+      // Verify shift is deleted
+      const deletedShift = await Shift.findById(shiftToDelete._id);
+      expect(deletedShift).to.be.null;
+    });
+  });
 });
