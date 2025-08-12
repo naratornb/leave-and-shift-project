@@ -65,36 +65,36 @@ describe('Shifts API', () => {
     await mongoose.connection.close();
   });
 
-  //
-  // describe('GET /api/shifts', () => {
-  //   it('should get all shifts', async () => {
-  //     const res = await chai.request(app)
-  //       .get('/api/shifts')
-  //       .set('Authorization', `Bearer ${token}`);
-  //
-  //     expect(res).to.have.status(200);
-  //     expect(res.body).to.be.an('array');
-  //     expect(res.body).to.have.lengthOf.at.least(1);
-  //     expect(res.body[0]).to.have.property('date');
-  //     expect(res.body[0]).to.have.property('startTime');
-  //     expect(res.body[0]).to.have.property('endTime');
-  //   });
-  // });
-  //
-  // describe('GET /api/shifts/:id', () => {
-  //   it('should get a single shift by id', async () => {
-  //     const res = await chai.request(app)
-  //       .get(`/api/shifts/${testShift._id}`)
-  //       .set('Authorization', `Bearer ${token}`);
-  //
-  //     expect(res).to.have.status(200);
-  //     expect(res.body).to.be.an('object');
-  //     expect(res.body).to.have.property('_id').equal(testShift._id.toString());
-  //     expect(res.body).to.have.property('date', '2023-11-15T00:00:00.000Z');
-  //     expect(res.body).to.have.property('startTime', '09:00');
-  //     expect(res.body).to.have.property('endTime', '17:00');
-  //   });
-  // });
+
+  describe('GET /api/shifts', () => {
+    it('should get all shifts', async () => {
+      const res = await chai.request(app)
+        .get('/api/shifts')
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('array');
+      expect(res.body).to.have.lengthOf.at.least(1);
+      expect(res.body[0]).to.have.property('date');
+      expect(res.body[0]).to.have.property('startTime');
+      expect(res.body[0]).to.have.property('endTime');
+    });
+  });
+
+  describe('GET /api/shifts/:id', () => {
+    it('should get a single shift by id', async () => {
+      const res = await chai.request(app)
+        .get(`/api/shifts/${testShift._id}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('_id').equal(testShift._id.toString());
+      expect(res.body).to.have.property('date', '2023-11-15T00:00:00.000Z');
+      expect(res.body).to.have.property('startTime', '09:00');
+      expect(res.body).to.have.property('endTime', '17:00');
+    });
+  });
 
   describe('POST /api/shifts', () => {
     it('should create a new shift', async () => {
