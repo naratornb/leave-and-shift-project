@@ -108,6 +108,30 @@ exports.updateEmployee = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+// @desc    Delete an employee
+// @route   DELETE /api/employees/:id
+// @access  Private (Admin only)
+exports.deleteEmployee = async (req, res) => {
+  try {
+    const employee = await User.findById(req.params.id);
+
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    // Don't allow deleting admin accounts
+    if (employee.role === 'admin') {
+      return res.status(403).json({ message: 'Cannot delete admin accounts' });
+    }
+
+    await employee.remove();
+    res.status(200).json({ message: 'Employee removed' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // @desc    Deactivate an employee
 // @route   PUT /api/employees/:id/deactivate
 // @access  Private (Manager, Admin)
