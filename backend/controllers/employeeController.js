@@ -64,3 +64,47 @@ exports.createEmployee = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+// @desc    Update an employee
+// @route   PUT /api/employees/:id
+// @access  Private (Manager, Admin)
+exports.updateEmployee = async (req, res) => {
+  try {
+    const employee = await User.findById(req.params.id);
+
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    // Only admins can change roles
+    if (req.body.role && req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Not authorized to change role' });
+    }
+
+    employee.name = req.body.name || employee.name;
+    employee.position = req.body.position || employee.position;
+    employee.contact = req.body.contact || employee.contact;
+
+    if (req.user.role === 'admin') {
+      employee.role = req.body.role || employee.role;
+    }
+
+    // Only update password if provided
+    if (req.body.password) {
+      employee.password = req.body.password;
+    }
+
+    const updatedEmployee = await employee.save();
+
+    res.status(200).json({
+      _id: updatedEmployee._id,
+      name: updatedEmployee.name,
+      email: updatedEmployee.email,
+      role: updatedEmployee.role,
+      position: updatedEmployee.position,
+      contact: updatedEmployee.contact
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
