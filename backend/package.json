@@ -4,7 +4,8 @@
   "description": "Backend for Leave and Shift Manager App",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha tests/**/*.test.js --timeout 10000 --exit",
+    "test:shifts": "mocha tests/shifts.test.js --timeout 10000 --exit",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "prod": "node server.js"
