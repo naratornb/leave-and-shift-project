@@ -52,29 +52,29 @@ exports.createShift = async (req, res) => {
     }
 };
 
-// // @desc    Update a shift
-// // @route   PUT /api/shifts/:id
-// // @access  Private (Manager, Admin)
-// exports.updateShift = async (req, res) => {
-//     try {
-//         const shift = await Shift.findById(req.params.id);
-//
-//         if (!shift) {
-//             return res.status(404).json({message: 'Shift not found'});
-//         }
-//
-//         shift.date = req.body.date || shift.date;
-//         shift.startTime = req.body.startTime || shift.startTime;
-//         shift.endTime = req.body.endTime || shift.endTime;
-//         shift.requiredStaff = req.body.requiredStaff || shift.requiredStaff;
-//         shift.location = req.body.location || shift.location;
-//
-//         const updatedShift = await shift.save();
-//         res.status(200).json(updatedShift);
-//     } catch (error) {
-//         res.status(400).json({message: error.message});
-//     }
-// };
+// @desc    Update a shift
+// @route   PUT /api/shifts/:id
+// @access  Private (Manager, Admin)
+exports.updateShift = async (req, res) => {
+    try {
+        const shift = await Shift.findById(req.params.id);
+
+        if (!shift) {
+            return res.status(404).json({message: 'Shift not found'});
+        }
+
+        shift.date = req.body.date || shift.date;
+        shift.startTime = req.body.startTime || shift.startTime;
+        shift.endTime = req.body.endTime || shift.endTime;
+        shift.requiredStaff = req.body.requiredStaff || shift.requiredStaff;
+        shift.location = req.body.location || shift.location;
+
+        const updatedShift = await shift.save();
+        res.status(200).json(updatedShift);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+};
 
 // // @desc    Delete a shift
 // // @route   DELETE /api/shifts/:id
