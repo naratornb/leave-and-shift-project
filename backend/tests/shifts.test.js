@@ -29,7 +29,7 @@ describe('Shifts API', () => {
       name: 'Test Manager',
       email: 'manager@test.com',
       password: 'password123',
-      role: 'admin'
+      role: 'manager'
     });
     await user.save();
     userId = user._id;

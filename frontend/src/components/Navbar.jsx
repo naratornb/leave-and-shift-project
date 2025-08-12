@@ -12,11 +12,20 @@ const Navbar = () => {
 
   return (
     <nav className="bg-stone-600 text-white p-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold">LSM - Leave Shi(f)t Easy</Link>
+      <Link to="/" className="text-2xl font-bold">LSM - Leave Shi(f)t Made Easy</Link>
       <div>
         {user ? (
           <>
             <Link to="/shifts" className="mr-4">Shifts</Link>
+            {/* Employee Management - visible to managers and admins */}
+            {(user?.role === 'manager' || user?.role === 'admin') && (
+              <Link
+                to="/employees"
+                className="mr-4"
+              >
+                Employees
+              </Link>
+            )}
             <Link to="/profile" className="mr-4">Profile</Link>
             <button
               onClick={handleLogout}
