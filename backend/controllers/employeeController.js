@@ -1,5 +1,34 @@
 const User = require('../models/User');
 
+// @desc    Get all employees
+// @route   GET /api/employees
+// @access  Private (Manager, Admin)
+exports.getEmployees = async (req, res) => {
+  try {
+    const employees = await User.find({ role: { $in: ['employee', 'manager'] } }).select('-password');
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Get single employee
+// @route   GET /api/employees/:id
+// @access  Private (Manager, Admin)
+exports.getEmployeeById = async (req, res) => {
+  try {
+    const employee = await User.findById(req.params.id).select('-password');
+
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    res.status(200).json(employee);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // @desc    Create an employee
 // @route   POST /api/employees
 // @access  Private (Admin only)
