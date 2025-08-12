@@ -50,24 +50,24 @@ const updateShift = async (shiftId, shiftData, token) => {
     return response.data;
 };
 
-// // Delete shift
-// const deleteShift = async (shiftId, token) => {
-//     const config = {
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     };
-//
-//     const response = await axios.delete(API_URL + shiftId, config);
-//     return response.data;
-// };
+// Delete shift
+const deleteShift = async (shiftId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+
+    const response = await axios.delete(API_URL + shiftId, config);
+    return response.data;
+};
 
 const shiftService = {
     createShift,
     getShifts,
     getShift,
     updateShift,
-    // deleteShift
+    deleteShift
 };
 
 export default shiftService;

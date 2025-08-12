@@ -76,20 +76,20 @@ exports.updateShift = async (req, res) => {
     }
 };
 
-// // @desc    Delete a shift
-// // @route   DELETE /api/shifts/:id
-// // @access  Private (Manager, Admin)
-// exports.deleteShift = async (req, res) => {
-//     try {
-//         const shift = await Shift.findById(req.params.id);
-//
-//         if (!shift) {
-//             return res.status(404).json({message: 'Shift not found'});
-//         }
-//
-//         await shift.remove();
-//         res.status(200).json({message: 'Shift removed'});
-//     } catch (error) {
-//         res.status(500).json({message: error.message});
-//     }
-// };
+// @desc    Delete a shift
+// @route   DELETE /api/shifts/:id
+// @access  Private (Manager, Admin)
+exports.deleteShift = async (req, res) => {
+    try {
+        const shift = await Shift.findById(req.params.id);
+
+        if (!shift) {
+            return res.status(404).json({message: 'Shift not found'});
+        }
+
+        await shift.remove();
+        res.status(200).json({message: 'Shift removed'});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
