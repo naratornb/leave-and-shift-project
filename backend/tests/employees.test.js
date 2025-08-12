@@ -133,4 +133,91 @@ describe('Employees API', () => {
     });
   });
 
+  describe('PUT /api/employees/:id', () => {
+    it('should update an employee', async () => {
+      const updatedEmployee = {
+        name: 'Updated Employee',
+        position: 'Senior Developer',
+        contact: {
+          phone: '111-222-3333',
+          address: '999 Updated St'
+        }
+      };
+
+      const res = await chai.request(app)
+        .put(`/api/employees/${testEmployee._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send(updatedEmployee);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('_id').equal(testEmployee._id.toString());
+      expect(res.body).to.have.property('name', 'Updated Employee');
+      expect(res.body).to.have.property('position', 'Senior Developer');
+      expect(res.body).to.have.property('contact');
+      expect(res.body.contact).to.have.property('phone', '111-222-3333');
+    });
+  });
+
+  describe('PUT /api/employees/:id/deactivate', () => {
+    it('should deactivate an employee', async () => {
+      // Create a new employee to deactivate
+      const employeeToDeactivate = new User({
+        name: 'To Be Deactivated',
+        email: 'deactivate@test.com',
+        password: 'password123',
+        role: 'employee',
+        position: 'Contractor',
+        contact: {
+          phone: '222-333-4444',
+          address: '222 Deactivate St'
+        },
+        active: true
+      });
+      await employeeToDeactivate.save();
+
+      const res = await chai.request(app)
+        .put(`/api/employees/${employeeToDeactivate._id}/deactivate`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('message', 'Employee deactivated');
+
+      // Verify employee is deactivated
+      const deactivatedEmployee = await User.findById(employeeToDeactivate._id);
+      expect(deactivatedEmployee.active).to.be.false;
+    });
+  });
+
+  describe('PUT /api/employees/:id/activate', () => {
+    it('should activate an employee', async () => {
+      // Create a new inactive employee to activate
+      const employeeToActivate = new User({
+        name: 'To Be Activated',
+        email: 'activate@test.com',
+        password: 'password123',
+        role: 'employee',
+        position: 'Intern',
+        contact: {
+          phone: '333-444-5555',
+          address: '333 Activate St'
+        },
+        active: false
+      });
+      await employeeToActivate.save();
+
+      const res = await chai.request(app)
+        .put(`/api/employees/${employeeToActivate._id}/activate`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('message', 'Employee activated');
+
+      // Verify employee is activated
+      const activatedEmployee = await User.findById(employeeToActivate._id);
+      expect(activatedEmployee.active).to.be.true;
+    });
+  });
 });
