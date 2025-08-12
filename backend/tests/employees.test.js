@@ -70,6 +70,38 @@ describe('Employees API', () => {
     await mongoose.connection.close();
   });
 
+  describe('GET /api/employees', () => {
+    it('should get all employees', async () => {
+      const res = await chai.request(app)
+        .get('/api/employees')
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('array');
+      expect(res.body).to.have.lengthOf.at.least(1);
+      expect(res.body[0]).to.have.property('name');
+      expect(res.body[0]).to.have.property('email');
+      expect(res.body[0]).to.have.property('role');
+      expect(res.body[0]).to.have.property('position');
+    });
+  });
+
+  describe('GET /api/employees/:id', () => {
+    it('should get a single employee by id', async () => {
+      const res = await chai.request(app)
+        .get(`/api/employees/${testEmployee._id}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('_id').equal(testEmployee._id.toString());
+      expect(res.body).to.have.property('name', 'Test Employee');
+      expect(res.body).to.have.property('email', 'employee@test.com');
+      expect(res.body).to.have.property('role', 'employee');
+      expect(res.body).to.have.property('position', 'Developer');
+    });
+  });
+
   describe('POST /api/employees', () => {
     it('should create a new employee', async () => {
       const newEmployee = {
