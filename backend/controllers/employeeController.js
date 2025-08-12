@@ -108,3 +108,47 @@ exports.updateEmployee = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+// @desc    Deactivate an employee
+// @route   PUT /api/employees/:id/deactivate
+// @access  Private (Manager, Admin)
+exports.deactivateEmployee = async (req, res) => {
+  try {
+    const employee = await User.findById(req.params.id);
+
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    // Don't allow deactivating admin accounts
+    if (employee.role === 'admin') {
+      return res.status(403).json({ message: 'Cannot deactivate admin accounts' });
+    }
+
+    employee.active = false;
+    await employee.save();
+
+    res.status(200).json({ message: 'Employee deactivated' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Activate an employee
+// @route   PUT /api/employees/:id/activate
+// @access  Private (Manager, Admin)
+exports.activateEmployee = async (req, res) => {
+  try {
+    const employee = await User.findById(req.params.id);
+
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    employee.active = true;
+    await employee.save();
+
+    res.status(200).json({ message: 'Employee activated' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

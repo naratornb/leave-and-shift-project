@@ -50,6 +50,30 @@ const updateEmployee = async (employeeId, employeeData, token) => {
   return response.data;
 };
 
+// Deactivate employee
+const deactivateEmployee = async (employeeId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  const response = await axios.put(`${API_URL}${employeeId}/deactivate`, {}, config);
+  return response.data;
+};
+
+// Activate employee
+const activateEmployee = async (employeeId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  const response = await axios.put(`${API_URL}${employeeId}/activate`, {}, config);
+  return response.data;
+};
+
 const employeeService = {
   createEmployee,
   getEmployees,
