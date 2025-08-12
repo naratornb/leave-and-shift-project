@@ -16,7 +16,7 @@ jobs:
         node-version: [ 22 ] # Test on multiple Node.js versions
 
 
-    environment: PROD
+    environment: MONGO_URI
 
     steps:
       - name: Checkout Code
@@ -75,7 +75,7 @@ jobs:
       - run: |
           cd ./backend
           touch .env
-          echo "${{ secrets.PROD }}" > .env
+          echo "${{ vars.PROD }}" > .env
 
       - run: pm2 start all
 
