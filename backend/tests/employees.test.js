@@ -159,6 +159,36 @@ describe('Employees API', () => {
     });
   });
 
+  describe('DELETE /api/employees/:id', () => {
+    it('should delete an employee', async () => {
+      // Create a new employee to delete
+      const employeeToDelete = new User({
+        name: 'To Be Deleted',
+        email: 'delete@test.com',
+        password: 'password123',
+        role: 'employee',
+        position: 'Temporary',
+        contact: {
+          phone: '000-000-0000',
+          address: '000 Delete St'
+        }
+      });
+      await employeeToDelete.save();
+
+      const res = await chai.request(app)
+        .delete(`/api/employees/${employeeToDelete._id}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body).to.have.property('message', 'Employee removed');
+
+      // Verify employee is deleted
+      const deletedEmployee = await User.findById(employeeToDelete._id);
+      expect(deletedEmployee).to.be.null;
+    });
+  });
+
   describe('PUT /api/employees/:id/deactivate', () => {
     it('should deactivate an employee', async () => {
       // Create a new employee to deactivate
