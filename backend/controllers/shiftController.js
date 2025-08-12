@@ -1,33 +1,33 @@
 const Shift = require('../models/Shift');
 
-// // @desc    Get all shifts
-// // @route   GET /api/shifts
-// // @access  Private (Manager, Admin)
-// exports.getShifts = async (req, res) => {
-//     try {
-//         const shifts = await Shift.find().populate('createdBy', 'name email');
-//         res.status(200).json(shifts);
-//     } catch (error) {
-//         res.status(500).json({message: error.message});
-//     }
-// };
+// @desc    Get all shifts
+// @route   GET /api/shifts
+// @access  Private (Manager, Admin)
+exports.getShifts = async (req, res) => {
+    try {
+        const shifts = await Shift.find().populate('createdBy', 'name email');
+        res.status(200).json(shifts);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
 
-// // @desc    Get single shift
-// // @route   GET /api/shifts/:id
-// // @access  Private (Manager, Admin)
-// exports.getShiftById = async (req, res) => {
-//     try {
-//         const shift = await Shift.findById(req.params.id).populate('createdBy', 'name email');
-//
-//         if (!shift) {
-//             return res.status(404).json({message: 'Shift not found'});
-//         }
-//
-//         res.status(200).json(shift);
-//     } catch (error) {
-//         res.status(500).json({message: error.message});
-//     }
-// };
+// @desc    Get single shift
+// @route   GET /api/shifts/:id
+// @access  Private (Manager, Admin)
+exports.getShiftById = async (req, res) => {
+    try {
+        const shift = await Shift.findById(req.params.id).populate('createdBy', 'name email');
+
+        if (!shift) {
+            return res.status(404).json({message: 'Shift not found'});
+        }
+
+        res.status(200).json(shift);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
 
 // @desc    Create a shift
 // @route   POST /api/shifts

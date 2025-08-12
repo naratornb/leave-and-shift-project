@@ -12,11 +12,11 @@ router.use(protect);
 router.use(authorize('manager', 'admin'));
 
 router.route('/')
-    // .get(getShifts)
+    .get(getShifts)
     .post(createShift);
 
 router.route('/:id')
-    // .get(getShiftById)
+    .get(getShiftById)
     // .put(updateShift)
     // .delete(deleteShift);
 
