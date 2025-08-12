@@ -38,18 +38,18 @@ const getShift = async (shiftId, token) => {
     return response.data;
 };
 
-// // Update shift
-// const updateShift = async (shiftId, shiftData, token) => {
-//     const config = {
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     };
-//
-//     const response = await axios.put(API_URL + shiftId, shiftData, config);
-//     return response.data;
-// };
-//
+// Update shift
+const updateShift = async (shiftId, shiftData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+
+    const response = await axios.put(API_URL + shiftId, shiftData, config);
+    return response.data;
+};
+
 // // Delete shift
 // const deleteShift = async (shiftId, token) => {
 //     const config = {
@@ -66,7 +66,7 @@ const shiftService = {
     createShift,
     getShifts,
     getShift,
-    // updateShift,
+    updateShift,
     // deleteShift
 };
 
