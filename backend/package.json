@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha tests/**/*.test.js --timeout 10000 --exit",
     "test:shifts": "mocha tests/shifts.test.js --timeout 10000 --exit",
+    "test:employees": "mocha tests/employees.test.js --timeout 10000 --exit",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "prod": "node server.js"
