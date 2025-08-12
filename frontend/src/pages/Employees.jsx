@@ -38,6 +38,18 @@ const getEmployee = async (employeeId, token) => {
   return response.data;
 };
 
+// Update employee
+const updateEmployee = async (employeeId, employeeData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  const response = await axios.put(API_URL + employeeId, employeeData, config);
+  return response.data;
+};
+
 const employeeService = {
   createEmployee,
   getEmployees,
