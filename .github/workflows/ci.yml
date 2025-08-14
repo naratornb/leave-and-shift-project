@@ -38,6 +38,7 @@ jobs:
           echo "Secret 1 is: $MONGO_URI"
           echo "Secret 2 is: $JWT_SECRET"
           echo "Secret 3 is: $PORT"
+          echo "Secret 4 is: $ENV_NAME"
 
       # Fail-safe pm2 stop all
       - name: Stop PM2 processes if any
