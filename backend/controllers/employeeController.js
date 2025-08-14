@@ -78,7 +78,7 @@ exports.updateEmployee = async (req, res) => {
 
     // Only admins can change roles
     if (req.body.role && req.user.role !== 'admin') {
-      return res.status(403).json({ message: 'Not authorized to change role' });
+      return res.status(403).json({ message: 'Not authorized to change role (Admin only)' });
     }
 
     employee.name = req.body.name || employee.name;
