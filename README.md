@@ -1,94 +1,137 @@
+# Leave and Shift Management System
 
-**Assessment 1 (Total Marks **20**)**
-
-Assignment: **Software requirements analysis and design (**Full-Stack CRUD Application Development with DevOps Practices**)**
+A comprehensive web application for managing staff shifts, leave requests, and employee information. This system allows managers and administrators to efficiently create shifts, assign employees, manage leave requests, and maintain employee profiles with role-based access control.
 
 
----
+## Features
+- **Shift Management**: Create, edit, and delete shifts with details such as date, time, location, and required staff count
+- **Employee Management**: Add, update, and deactivate employee profiles with role-based access control
+- **Leave Request & Approval**: Employees can submit leave requests, and managers can approve or reject them
+- **Authentication & Authorization**: Role-based access control for Employees, Managers, and Administrators
+- **Dashboard**: Role-specific dashboard with relevant information and quick actions
 
-**Objective**
+## Project Setup Instructions [EC2]
+- start EC2 instance
+- - instance id: 
+- - instance ip:
+- rerun build pipline
+- access with given public ip address (using qut local network)
+## Project Setup Instructions [Local]
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or cloud instance)
+- npm or yarn
 
-You have been provided with a starter project that includes user authentication using Node.js, React.js, and MongoDB. Your task is to extend this application by implementing CRUD (Create, Read, Update, Delete) operations of different featuresfor a real-world application of your choice, while following industry best practices such as: 
+## Backend Setup
+### 1. Clone the repository
 
-* **Project Management with JIRA**
-* **Requirement Diagram**, **Block Definition Diagram (**BDD), Parametric Diagram using**SysML**
-* **Version Control using GitHub**
-* **CI/CD Integration for Automated Deployment**
+```
+git clone https://github.com/naratornb/leave-and-shift-project.git
 
----
+cd leave-and-shift-project/backend 
+```
 
-**GitHub link of the starter project: **[https://github.com/rajuiit/sdlapps](https://github.com/rajuiit/sdlapps)
+### 2. Install dependencies:
+```
+npm install
+```
 
----
+### 3. Setup environment variables
+```
+MONGO_URI=mongodb+srv://local:mongo1234@cluster0.r0cf3te.mongodb.net/lsm_db?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=2J8zqkP7VN6bxzg+Wy7DQZsd3Yx8mF3Bl0kch6HYtFs=
+PORT=5001
+```
 
-**Requirement**
+## Frontend Setup
+### 1. Navigate to the frontend directory:
+```
+cd ../frontend
+```
 
-1. **Choose a Real-World Application**
+## 2. Install dependencies:
+```
+npm install
+```
+## 3. Start the server:
+```
+npm start
+```
+The frontend will run on http://localhost:3000
 
-We will send you an email to choose a Real-World project. If you face any difficulties in choosing your project, please contact your tutor.
+## Running Tests
+To run the backend tests:
+```
+cd backend
+npm test
+```
 
-2. **Project Design with SysML and Project Management with JIRA**
+## Public URL
+The project is currently under development and not deployed. For local access:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000
 
-* Draw a requirements diagram, Block Definition Diagram (BDD), and Parametric Diagram based on your project (Connect all functional features).
-* Create a JIRA project and define:
-  * Epic
-  * User Stories (features required in your app)
-  * Child issues or Subtasks (breaking down development work)
-  * Sprint Implementation (organizing work into milestones)
-* Provide your JIRA board URL in the project README.
+## Login Credentials
+For testing purposes, you can use the following credentials:
+### Admin User
+- Email: admin@test.com
+- Password: password123
+### Manager User
+- Email: manager@test.com
+- Password: password123
+### Employee User
+- Email: employee@test.com
+- Password: password123
 
-**3. Backend Development (Node.js + Express + MongoDB)**
+## Technology Stack
+**Frontend**: React, React Router, Axios, Tailwind CSS 
 
-* Set up and configure the MongoDB database connection.
-* Implement various backend functions for handling application data.Ensure that all functions are compatible with an Application Programming Interface (API) structure(Follow existing patterns used in the Leave and Shift Manager App where applicable).
-* Implement CRUD operations forcreating, reading, updating, and deleting records for each functionality.
+**Backend**: Node.js, Express, MongoDB, Mongoose, JWT
 
-4. **Frontend Development (React.js)**
+**Testing**: Mocha, Chai
 
-* Create a user-friendly interface to interact with your API endpoint (Follow Leave and Shift Manager app).
-* Implement different forms for adding, updating, and deleting records.
-* Display data using tables, cards, or lists (Follow how we showed data in Leave and Shift Manager app, try to implement better visualization for the frontend.)
+## Project Structure
+```
+leave-and-shift-project/
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── tests/
+│   ├── middleware/
+│   ├── server.js
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── App.js
+│   └── package.json
+└── README.md
+```
 
-**5. Authentication & Authorization** (Prerequisite Task)
+## API Endpoints
+### Authentication
+- `POST /api/auth/login` - User login
+- `GET /api/auth/profile` - Get user profile
+- `PUT /api/auth/profile` - Update user profile
+### Shifts (Manager/Admin only)
+- `GET /api/shifts` - Get all shifts
+- `GET /api/shifts/:id` - Get a specific shift
+- `POST /api/shifts` - Create a new shift
+- `PUT /api/shifts/:id `- Update a shift
+- `DELETE /api/shifts/:id` - Delete a shift
+### Employees (Manager/Admin only)
+- `GET /api/employees` - Get all employees
+- `GET /api/employees/:id` - Get a specific employee
+- `POST /api/employees` - Create a new employee (Admin only)
+- `PUT /api/employees/:id` - Update an employee
+- `DELETE /api/employees/:id` - Delete an employee (Admin only)
+- `PUT /api/employees/:id/deactivate` - Deactivate an employee
+- `PUT /api/employees/:id/activate` - Activate an employee
 
-* Ensure only authenticated users can access and perform CRUD operations. (Already developed in your project)
-* Use JWT (JSON Web Tokens) for user authentication (Use the Leave and Shift Manager one from .env file).
-
-**6. GitHub Version Control & Branching Strategy**
-
-* Use GitHub for version control and maintain:
-* main branch (stable production-ready code)
-* Feature branches for each new feature
-* Follow proper commit messages and pull request (PR) for code reviews.
-
-**7. CI/CD Pipeline Setup**
-
-* Implement a CI/CD pipeline using GitHub Actions to:
-* Automatically run tests on every commit/pull request (Optional).
-* Deploy the backend to AWS. (Use the QUT provided EC2 instance)
-* Deploy the frontend to AWS.
-* Document your CI/CD workflow in the README.
-
----
-
-**Submission Requirements**
-
-**A report **contains** the following (Provide screenshots as evidence for each implemented task. **The screenshot should **contain** your username** from JIRA, GITHUB, and AWS**):
-
-* **JIRA Project **Management**(Provide screenshots in the **report o**f at least two epics**, **including user story, sub**t**a**sks**. **Please **don’t** provide **the **U**ser Authentication** epic**.**Provide your JIRA Board URL in the report and README file as well.**Through the JIRA Board, we will systematically review the completeness of the project features, organised under Epics, User Stories, and Sub-tasks.**
-* Requirement diagram, Block Definition Diagram (BDD), Parametric Diagram (Using project features).
-* **GitHub Repository (backend/ and frontend/)** link. We will **review** your code implementation, which you followed from the task description. We will also **review** your commits, main branch, feature branches, and pull requests. **(**Please note that the authorisation** (Log In, Registration)** is the prerequisite for backend development.**)**
-* CI/CD pipeline details step by step screenshot.
-* README.md with:
-* Project setup instructions.
-* Public URL of your project.
-* Provide a project-specific username and password if we need to access your dashboard.
-
----
-
-**Assessment Criteria:**
-
-* Clarity and completeness of Jira board and SysML models.
-* Adherence to Git best practices and practical contributions.
-* Successful implementation, deploymentand CI/CD pipeline.
-* Problem-solving skills and the ability to go beyond basic requirements.
+## Contact
+For any queries, please contact the development team at [**f.luke.benj@gmail.com**].
