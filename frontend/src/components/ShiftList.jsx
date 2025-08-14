@@ -5,8 +5,8 @@ import {useAuth} from '../context/AuthContext';
 import {format} from 'date-fns';
 
 const ShiftList = () => {
-    const {shifts, isLoading, error, getShifts, deleteShift} = useShiftContext();
     const {user} = useAuth();
+    const {shifts, isLoading, error, getShifts, deleteShift} = useShiftContext();
 
     useEffect(() => {
         getShifts();

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from "../axiosConfig";
 
 const API_URL = '/api/employees/';
 
@@ -10,7 +10,7 @@ const createEmployee = async (employeeData, token) => {
     }
   };
 
-  const response = await axios.post(API_URL, employeeData, config);
+  const response = await axiosInstance.post(API_URL, employeeData, config);
   return response.data;
 };
 
@@ -22,7 +22,7 @@ const getEmployees = async (token) => {
     }
   };
 
-  const response = await axios.get(API_URL, config);
+  const response = await axiosInstance.get(API_URL, config);
   return response.data;
 };
 
@@ -34,7 +34,7 @@ const getEmployee = async (employeeId, token) => {
     }
   };
 
-  const response = await axios.get(API_URL + employeeId, config);
+  const response = await axiosInstance.get(API_URL + employeeId, config);
   return response.data;
 };
 
@@ -46,7 +46,7 @@ const updateEmployee = async (employeeId, employeeData, token) => {
     }
   };
 
-  const response = await axios.put(API_URL + employeeId, employeeData, config);
+  const response = await axiosInstance.put(API_URL + employeeId, employeeData, config);
   return response.data;
 };
 
@@ -58,7 +58,7 @@ const deleteEmployee = async (employeeId, token) => {
     }
   };
 
-  const response = await axios.delete(API_URL + employeeId, config);
+  const response = await axiosInstance.delete(API_URL + employeeId, config);
   return response.data;
 };
 
@@ -70,7 +70,7 @@ const deactivateEmployee = async (employeeId, token) => {
     }
   };
 
-  const response = await axios.put(`${API_URL}${employeeId}/deactivate`, {}, config);
+  const response = await axiosInstance.put(`${API_URL}${employeeId}/deactivate`, {}, config);
   return response.data;
 };
 
@@ -82,7 +82,7 @@ const activateEmployee = async (employeeId, token) => {
     }
   };
 
-  const response = await axios.put(`${API_URL}${employeeId}/activate`, {}, config);
+  const response = await axiosInstance.put(`${API_URL}${employeeId}/activate`, {}, config);
   return response.data;
 };
 

@@ -4,8 +4,8 @@ import { useEmployeeContext } from '../context/EmployeeContext';
 import {useAuth} from '../context/AuthContext';
 
 const EmployeeList = () => {
-  const { employees, isLoading, error, getEmployees, deactivateEmployee, activateEmployee } = useEmployeeContext();
   const { user } = useAuth();
+  const { employees, isLoading, error, getEmployees, deactivateEmployee, activateEmployee } = useEmployeeContext();
 
   useEffect(() => {
     getEmployees();

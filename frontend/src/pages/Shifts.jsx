@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from "../axiosConfig";
 
 const API_URL = '/api/shifts/';
 
@@ -10,7 +10,7 @@ const createShift = async (shiftData, token) => {
         }
     };
 
-    const response = await axios.post(API_URL, shiftData, config);
+    const response = await axiosInstance.post(API_URL, shiftData, config);
     return response.data;
 };
 
@@ -22,7 +22,7 @@ const getShifts = async (token) => {
         }
     };
 
-    const response = await axios.get(API_URL, config);
+    const response = await axiosInstance.get(API_URL, config);
     return response.data;
 };
 
@@ -34,7 +34,7 @@ const getShift = async (shiftId, token) => {
         }
     };
 
-    const response = await axios.get(API_URL + shiftId, config);
+    const response = await axiosInstance.get(API_URL + shiftId, config);
     return response.data;
 };
 
@@ -46,7 +46,7 @@ const updateShift = async (shiftId, shiftData, token) => {
         }
     };
 
-    const response = await axios.put(API_URL + shiftId, shiftData, config);
+    const response = await axiosInstance.put(API_URL + shiftId, shiftData, config);
     return response.data;
 };
 
@@ -58,7 +58,7 @@ const deleteShift = async (shiftId, token) => {
         }
     };
 
-    const response = await axios.delete(API_URL + shiftId, config);
+    const response = await axiosInstance.delete(API_URL + shiftId, config);
     return response.data;
 };
 
