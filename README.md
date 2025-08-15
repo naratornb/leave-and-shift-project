@@ -12,8 +12,8 @@ A comprehensive web application for managing staff shifts, leave requests, and e
 
 ## Project Setup Instructions [EC2]
 - start EC2 instance
-- - instance id: 
-- - instance ip:
+- - instance id: i-0c7a7d30cde1805af
+- - instance ip: 54.66.213.198
 - rerun build pipline
 - access with given public ip address (using qut local network)
 ## Project Setup Instructions [Local]
