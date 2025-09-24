@@ -40,7 +40,7 @@ npm install
 ```
 MONGO_URI=mongodb+srv://local:mongo1234@cluster0.r0cf3te.mongodb.net/lsm_db?retryWrites=true&w=majority&appName=Cluster0
 JWT_SECRET=2J8zqkP7VN6bxzg+Wy7DQZsd3Yx8mF3Bl0kch6HYtFs=
-PORT=5001
+PORT=5002
 ```
 
 ## Frontend Setup
@@ -69,7 +69,7 @@ npm test
 ## Public URL
 The project is currently under development and not deployed. For local access:
 - Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+- Backend API: http://localhost:5002
 
 ## Login Credentials
 For testing purposes, you can use the following credentials:
